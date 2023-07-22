@@ -12,6 +12,13 @@ on:
   status: {}
 
 jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - uses: hmarr/auto-approve-action@v3
   automerge:
     runs-on: ubuntu-latest
     steps:
@@ -27,4 +34,3 @@ jobs:
           UPDATE_LABELS: ""
           UPDATE_METHOD: "rebase"
           MERGE_FILTER_AUTHOR: "github-actions[bot]"
-

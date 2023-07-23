@@ -16,14 +16,14 @@ jobs:
     steps:
       - uses: hmarr/auto-approve-action@v3
         with:
-          github-token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.GITHUB_TOKEN}}
   automerge:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
         uses: pascalgn/automerge-action@v0.14.3
         env:
-          GITHUB_TOKEN: "${{ secrets.PAT }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN}}"
           MERGE_LABELS: "automerge,!block, !wip"
           MERGE_METHOD: "squash"
           MERGE_COMMIT_MESSAGE: "Automatic merge of PR #{number}"

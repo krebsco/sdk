@@ -13,12 +13,10 @@ on:
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
-    - uses: hmarr/auto-approve-action@v3
-      with:
-        pull-request-number: ${{ secrets.PAT }}
+      - uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.PAT }}
   automerge:
     runs-on: ubuntu-latest
     steps:

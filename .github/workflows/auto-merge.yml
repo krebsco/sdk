@@ -3,27 +3,24 @@ on:
   pull_request_target:
     types:
       - labeled
-  pull_request_review:
-    types:
-      - submitted
-  check_suite:
-    types:
-      - completed
 
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: github.actor == 'github-actions[bot]'
     steps:
       - uses: hmarr/auto-approve-action@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN}}
+          review-message: "Auto approved automated PR"
   automerge:
     runs-on: ubuntu-latest
     steps:
       - name: automerge
         uses: pascalgn/automerge-action@v0.14.3
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN}}"
+          GITHUB_TOKEN: "${{ secrets.PAT}}"
           MERGE_LABELS: "automerge,!block, !wip"
           MERGE_METHOD: "squash"
           MERGE_COMMIT_MESSAGE: "Automatic merge of PR #{number}"
